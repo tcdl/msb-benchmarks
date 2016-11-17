@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">100000</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1468924404000</longProp>
+        <longProp name="ThreadGroup.end_time">1468924404000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.zeroclue.jmeter.protocol.amqp.AMQPPublisher guiclass="com.zeroclue.jmeter.protocol.amqp.gui.AMQPPublisherGui" testclass="com.zeroclue.jmeter.protocol.amqp.AMQPPublisher" testname="AMQP Publisher" enabled="true">
+          <stringProp name="AMQPSampler.Exchange">msb:jMeter:perfomance</stringProp>
+          <boolProp name="AMQPSampler.ExchangeDurable">false</boolProp>
+          <boolProp name="AMQPSampler.ExchangeRedeclare">false</boolProp>
+          <stringProp name="AMQPSampler.Queue"></stringProp>
+          <stringProp name="AMQPSampler.RoutingKey"></stringProp>
+          <stringProp name="AMQPSampler.VirtualHost">/</stringProp>
+          <stringProp name="AMQPSampler.MessageTTL"></stringProp>
+          <stringProp name="AMQPSampler.MessageExpires"></stringProp>
+          <stringProp name="AMQPSampler.ExchangeType">fanout</stringProp>
+          <stringProp name="AMQPSampler.QueueDurable">false</stringProp>
+          <stringProp name="AMQPSampler.QueueExclusive">false</stringProp>
+          <stringProp name="AMQPSampler.QueueAutoDelete">false</stringProp>
+          <boolProp name="AMQPSampler.Redeclare">false</boolProp>
+          <stringProp name="AMQPSampler.Timeout">1000</stringProp>
+          <stringProp name="AMQPSampler.Iterations">1</stringProp>
+          <stringProp name="AMQPSampler.Host">localhost</stringProp>
+          <stringProp name="AMQPSampler.Port">5672</stringProp>
+          <stringProp name="AMQPSampler.Username">guest</stringProp>
+          <stringProp name="AMQPSampler.Password">guest</stringProp>
+          <stringProp name="AMQPSampler.SSL">false</stringProp>
+          <boolProp name="AMQPConsumer.Persistent">false</boolProp>
+          <boolProp name="AMQPConsumer.UseTx">false</boolProp>
+          <stringProp name="AMQPPublisher.MessageRoutingKey"></stringProp>
+          <stringProp name="AMQPPublisher.Message">{
+&quot;id&quot;: &quot;cfec13b0-a08c-471e-b271-6a1ee2444d12&quot;,
+&quot;correlationId&quot;: &quot;48aada76-e72d-4df7-8a98-bac28d04abea&quot;,
+&quot;tags&quot;: [],
+&quot;topics&quot;: {
+&quot;to&quot;: &quot;eventstore:v1&quot;,
+&quot;response&quot;: &quot;eventstore:v1:performance:test&quot;,
+&quot;forward&quot;: &quot;es:target&quot;,
+&quot;routingKey&quot;: &quot;&quot;
+},
+&quot;meta&quot;: {
+&quot;createdAt&quot;: &quot;2016-06-23T12:33:01.205Z&quot;,
+&quot;serviceDetails&quot;: {
+&quot;name&quot;: &quot;tested12345-tested12345&quot;,
+&quot;instanceId&quot;: &quot;tester-it-001&quot;,
+&quot;version&quot;: &quot;1.0.0&quot;
+}
+}
+}</stringProp>
+          <stringProp name="AMQPPublisher.MessageType"></stringProp>
+          <stringProp name="AMQPPublisher.ReplyToQueue"></stringProp>
+          <stringProp name="AMQPPublisher.CorrelationId"></stringProp>
+          <stringProp name="AMQPPublisher.ContentType"></stringProp>
+          <stringProp name="AMQPPublisher.MessageId"></stringProp>
+          <elementProp name="AMQPPublisher.Headers" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </com.zeroclue.jmeter.protocol.amqp.AMQPPublisher>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

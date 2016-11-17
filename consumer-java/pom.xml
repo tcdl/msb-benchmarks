@@ -1,0 +1,267 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.thomascook.bus</groupId>
+    <artifactId>bus2http-microservice</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.3.2.RELEASE</version>
+    </parent>
+
+    <packaging>jar</packaging>
+
+    <scm>
+        <connection>scm:git:git@github-bus2http-microservice:ThomasCookOnline/bus2http-microservice.git</connection>
+        <developerConnection>scm:git:git@github-bus2http-microservice:ThomasCookOnline/bus2http-microservice.git</developerConnection>
+        <url>https://github.com/ThomasCookOnline/bus2http-microservice</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>atg</id>
+            <name>Thomas Cook Online Releases</name>
+            <url>https://mvn.devtools.thomascook.com/nexus/content/repositories/java-microservice-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>atg</id>
+            <name>Thomas Cook Online Snapshots</name>
+            <url>https://mvn.devtools.thomascook.com/nexus/content/repositories/java-microservice-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <organization>
+        <name>Thomas Cook</name>
+        <url>www.thomascook.com</url>
+    </organization>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- MSB-java -->
+        <msb-java.version>1.4.4</msb-java.version>
+
+        <!-- Third party -->
+        <spring-retry.version>1.1.2.RELEASE</spring-retry.version>
+        <httpcomponents.version>4.5</httpcomponents.version>
+        <jolt.version>0.0.16</jolt.version>
+        <jackson.version>2.7.0</jackson.version>
+
+        <!-- Testing -->
+        <junit.version>4.12</junit.version>
+        <mockito.version>1.10.19</mockito.version>
+        <assertj-core.version>3.2.0</assertj-core.version>
+        <mock-http-server.version>3.10.0</mock-http-server.version>
+
+        <!-- Build -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+
+        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <xml-maven-plugin.version>1.0.1</xml-maven-plugin.version>
+
+        <logstash-logback-encoder.version>4.5.1</logstash-logback-encoder.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>artifactory</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <snapshots/>
+                    <id>snapshots</id>
+                    <name>libs-snapshot</name>
+                    <url>https://mvn.devtools.thomascook.com/nexus/content/repositories/jfrog-libs/</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots/>
+                    <id>snapshots</id>
+                    <name>plugins-snapshot</name>
+                    <url>https://mvn.devtools.thomascook.com/nexus/content/repositories/jfrog-plugins/</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>bintray</id>
+            <url>http://dl.bintray.com/tcdl/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>${spring-retry.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.tcdl.msb</groupId>
+            <artifactId>msb-java-core</artifactId>
+            <version>${msb-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.tcdl.msb</groupId>
+            <artifactId>msb-java-amqp</artifactId>
+            <version>${msb-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpcomponents.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bazaarvoice.jolt</groupId>
+            <artifactId>jolt-core</artifactId>
+            <version>${jolt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bazaarvoice.jolt</groupId>
+            <artifactId>json-utils</artifactId>
+            <version>${jolt.version}</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>io.github.tcdl.msb</groupId>
+            <artifactId>msb-java-core</artifactId>
+            <type>test-jar</type>
+            <version>${msb-java.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-netty</artifactId>
+            <version>${mock-http-server.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>fat-${project.artifactId}-${project.version}</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>deploy-fat-jar</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <repositoryId>${project.distributionManagement.snapshotRepository.id}</repositoryId>
+                            <url>${project.distributionManagement.snapshotRepository.url}</url>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>fat-${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
+                            <file>target/fat-${project.artifactId}-${project.version}.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
