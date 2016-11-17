@@ -4,7 +4,7 @@ msb.configure({schema: null});
 
 msb
 .channelManager
-.findOrCreateConsumer('msb:perfomance', {groupId: 'testing'})
+.findOrCreateConsumer('msb:perfomance', {groupId: 'testing', durable: true})
 .on('message', function(message) {
 })
 .on('error', console.error);

@@ -15,7 +15,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">100000</stringProp>
+          <stringProp name="LoopController.loops">1000000</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -51,23 +51,53 @@
           <boolProp name="AMQPConsumer.UseTx">false</boolProp>
           <stringProp name="AMQPPublisher.MessageRoutingKey"></stringProp>
           <stringProp name="AMQPPublisher.Message">{
-&quot;id&quot;: &quot;cfec13b0-a08c-471e-b271-6a1ee2444d12&quot;,
-&quot;correlationId&quot;: &quot;48aada76-e72d-4df7-8a98-bac28d04abea&quot;,
-&quot;tags&quot;: [],
-&quot;topics&quot;: {
-&quot;to&quot;: &quot;eventstore:v1&quot;,
-&quot;response&quot;: &quot;eventstore:v1:performance:test&quot;,
-&quot;forward&quot;: &quot;es:target&quot;,
-&quot;routingKey&quot;: &quot;&quot;
-},
-&quot;meta&quot;: {
-&quot;createdAt&quot;: &quot;2016-06-23T12:33:01.205Z&quot;,
-&quot;serviceDetails&quot;: {
-&quot;name&quot;: &quot;tested12345-tested12345&quot;,
-&quot;instanceId&quot;: &quot;tester-it-001&quot;,
-&quot;version&quot;: &quot;1.0.0&quot;
-}
-}
+  &quot;id&quot;: &quot;cfec13b0-a08c-471e-b271-6a1ee2444d12&quot;,
+  &quot;correlationId&quot;: &quot;48aada76-e72d-4df7-8a98-bac28d04abea&quot;,
+  &quot;tags&quot;: [
+    &quot;assetId:02DFAD4333184095 85270ECD9B8462E0&quot;,
+    &quot;damRequestId:83177c17-ba72-4844-8188-cae184338676&quot;
+  ],
+  &quot;topics&quot;: {
+    &quot;to&quot;: &quot;eventstore:v1&quot;,
+    &quot;response&quot;: &quot;eventstore:v1:response:dam-0001&quot;,
+    &quot;forward&quot;: &quot;dam:events:asset&quot;
+  },
+  &quot;meta&quot;: {
+    &quot;createdAt&quot;: &quot;2016-06-23T12:33:01.205Z&quot;,
+    &quot;publishedAt&quot;: &quot;2016-06-23T12:33:01.208Z&quot;,
+    &quot;durationMs&quot;: 3,
+    &quot;serviceDetails&quot;: {
+      &quot;name&quot;: &quot;dam-microservice&quot;,
+      &quot;version&quot;: &quot;1.0.0&quot;,
+      &quot;instanceId&quot;: &quot;dam-0001&quot;,
+      &quot;hostname&quot;: &quot;msb-java-qa&quot;,
+      &quot;ip&quot;: &quot;10.181.132.128&quot;,
+      &quot;pid&quot;: 9654
+    }
+  },
+  &quot;payload&quot;: {
+    &quot;event&quot;: &quot;assetDeleted.v1&quot;,
+    &quot;seq&quot;: 384482720141778944,
+    &quot;entity&quot;: &quot;asset&quot;,
+    &quot;entityId&quot;: &quot;02DFAD4333184095 85270ECD9B8462E0&quot;,
+    &quot;body&quot;: {
+      &quot;event&quot;: &quot;assetDeleted.v1&quot;,
+      &quot;tags&quot;: {
+        &quot;fileName&quot;: &quot;ES_MAD_Orfila_5iegzwz_00012.jpg&quot;
+      },
+      &quot;assetId&quot;: &quot;02DFAD4333184095 85270ECD9B8462E0&quot;,
+      &quot;metadata&quot;: {
+        &quot;ImageType&quot;: &quot;Hotel&quot;,
+        &quot;MasterHotelID&quot;: &quot;5iegzwz&quot;,
+        &quot;AssetID&quot;: &quot;02DFAD4333184095 85270ECD9B8462E0&quot;,
+        &quot;ReasonForAction&quot;: &quot;tfgjfgjft&quot;,
+        &quot;ForceDelete&quot;: true,
+        &quot;Country&quot;: &quot;Spain&quot;,
+        &quot;RegionName&quot;: &quot;Madrid&quot;,
+        &quot;LocationName&quot;: &quot;Madrid&quot;
+      }
+    }
+  }
 }</stringProp>
           <stringProp name="AMQPPublisher.MessageType"></stringProp>
           <stringProp name="AMQPPublisher.ReplyToQueue"></stringProp>

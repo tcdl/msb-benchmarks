@@ -10,9 +10,9 @@
 
 ## Consuming
 
-For node.js version run `start_node.sh`. Check result in [rabbitmq dashboard](http://localhost:15672/#/queues/%2F/msb%3Aperfomance.testing.t)
-
-For java version run `start_java.sh`. Check result in [rabbitmq dashboard](http://localhost:15672/#/queues/%2F/msb%3Aperfomance.testing.t)
+1. Run `consuming.sh`.
+2. Chose version and message size.
+3. Check result in [rabbitmq dashboard](http://localhost:15672/#/queues/%2F/msb%3Aperfomance.testing.d)
 
 ## Producing
 
