@@ -6,6 +6,7 @@
 - [java](https://www.java.com/en/)
 - [maven](https://spring.io/guides/gs/maven/)
 - [node.js](https://nodejs.org/en/)
+- [pm2](http://pm2.keymetrics.io)
 - jmeter with plugins. For install run `install_jmeter.sh`
 
 ## Consuming

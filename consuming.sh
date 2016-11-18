@@ -20,17 +20,35 @@ then
 	echo "node.js don't detected. Please install node.js. Aborting";
 fi
 
+if ! type pm2 >/dev/null 2>&1
+then
+	echo "pm2 don't detected. Please install pm2 by running `npm install -g pm2`. Aborting";
+fi
+
 echo "Select msb version";
-options=("node.js" "java" "Quit")
+options=("node.js single worker" "node.js cluster" "java" "Quit")
 select opt in "${options[@]}"
     do
         case $opt in
-        "node.js")
+        "node.js single worker")
             echo "Installing node dependency";
             cd consumer-nodejs
             npm install >/dev/null 2>&1
             cd ..
             consume_command='node consumer-nodejs/index.js'
+            break;
+            ;;
+        "node.js cluster")
+            if [[ $(pm2 status -m | grep status) ]]
+            then
+                echo 'PM2 is working now. Aborting.';
+                exit 1;
+            fi
+            echo "Installing node dependency";
+            cd consumer-nodejs
+            npm install >/dev/null 2>&1
+            cd ..
+            consume_command='pm2 start consumer-nodejs/index.js -i 0'
             break;
             ;;
         "java")
@@ -78,14 +96,12 @@ function ctrl_c(){
     echo "Removing exchange and queue";
     curl -i -u guest:guest -XDELETE http://localhost:15672/api/exchanges/%2F/msb:jMeter:perfomance
     curl -i -u guest:guest -XDELETE http://localhost:15672/api/queues/%2F/msb:perfomance.testing.d
-
+    pm2 kill;
     kill $PID;
     kill $(jps -l | grep ApacheJMeter.jar | awk '{print $1}');
 	echo "Script stopped";
 	exit 0;
 }
-
-
 
 echo "Creating exchange, queue and bindings";
 curl -i -u guest:guest -H "content-type:application/json" -XPUT -d'{"type":"fanout","durable":false}' http://localhost:15672/api/exchanges/%2F/msb:jMeter:perfomance >/dev/null 2>&1
@@ -98,3 +114,4 @@ jmeter -n -t $test_file >/dev/null 2>&1
 echo "Starting consuming"
 eval $consume_command & PID=$!;
 wait $PID;
+tail -f /dev/null;
