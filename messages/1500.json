@@ -1,0 +1,49 @@
+{
+  "id": "cfec13b0-a08c-471e-b271-6a1ee2444d12",
+  "correlationId": "48aada76-e72d-4df7-8a98-bac28d04abea",
+  "tags": [
+    "assetId:02DFAD4333184095 85270ECD9B8462E0",
+    "damRequestId:83177c17-ba72-4844-8188-cae184338676"
+  ],
+  "topics": {
+    "to": "eventstore:v1",
+    "response": "eventstore:v1:response:dam-0001",
+    "forward": "dam:events:asset"
+  },
+  "meta": {
+    "createdAt": "2016-06-23T12:33:01.205Z",
+    "publishedAt": "2016-06-23T12:33:01.208Z",
+    "durationMs": 3,
+    "serviceDetails": {
+      "name": "dam-microservice",
+      "version": "1.0.0",
+      "instanceId": "dam-0001",
+      "hostname": "msb-java-qa",
+      "ip": "10.181.132.128",
+      "pid": 9654
+    }
+  },
+  "payload": {
+    "event": "assetDeleted.v1",
+    "seq": 384482720141778944,
+    "entity": "asset",
+    "entityId": "02DFAD4333184095 85270ECD9B8462E0",
+    "body": {
+      "event": "assetDeleted.v1",
+      "tags": {
+        "fileName": "ES_MAD_Orfila_5iegzwz_00012.jpg"
+      },
+      "assetId": "02DFAD4333184095 85270ECD9B8462E0",
+      "metadata": {
+        "ImageType": "Hotel",
+        "MasterHotelID": "5iegzwz",
+        "AssetID": "02DFAD4333184095 85270ECD9B8462E0",
+        "ReasonForAction": "tfgjfgjft",
+        "ForceDelete": true,
+        "Country": "Spain",
+        "RegionName": "Madrid",
+        "LocationName": "Madrid"
+      }
+    }
+  }
+}

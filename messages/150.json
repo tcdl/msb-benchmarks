@@ -1,0 +1,12 @@
+{
+  "id": "123",
+  "correlationId": "123",
+  "tags": [],
+  "topics": {
+    "to": "123"
+  },
+  "meta": {
+    "createdAt": "2016-06-23T12:33:01.205Z",
+    "serviceDetails": {}
+  }
+}

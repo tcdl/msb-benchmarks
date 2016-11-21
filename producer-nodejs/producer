@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var argv = require('yargs')
+  .default('count', 10)
+  .default('message', 150)
+  .argv;
+var msb = require('msb');
+msb.configure({schema: null});
+
+var message = require("../messages/"+argv.message);
+
+function stopHandler() {
+  console.log('Node.js Consumer Stopping');
+  msb.channelManager.close();
+};
+
+process.on("SIGTERM", stopHandler);
+process.on("SIGINT", stopHandler);
+process.on("SIGHUP", stopHandler);
+
+var publish = msb.channelManager.findOrCreateProducer('msb:perfomance', {groupId: 'testing', durable: true}).publish;
+
+console.log('Node.js producer started');
+
+//Monkey patching event emitter
+require('events').EventEmitter.prototype._maxListeners = 0;
+
+var pendingCount = argv.count;
+for (var i = 0; i < argv.count; i++) {
+  publish(message, (err) => {
+    pendingCount--;
+    if (!pendingCount) {
+      stopHandler();
+    }
+  });
+}
